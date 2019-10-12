@@ -7,6 +7,3 @@ This is the Multitasking Training Pratical work materials.
 ```
 gcc -o mySoftware msg.c -lpthread
 ```
-
-# Psy Practical Work
-Open the kp file with the Asterios Developer software
