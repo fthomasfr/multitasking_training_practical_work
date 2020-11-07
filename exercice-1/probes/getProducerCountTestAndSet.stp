@@ -1,0 +1,37 @@
+#!/usr/bin/stap
+
+# This script tries to identify contended mutex locks.
+
+global thread_blocktime		  # time of latest lock call by thread
+global lock_waits # long-lived stats on (pid,lock) blockage elapsed time
+global process_names		  # long-lived pid-to-execname mapping
+
+global mutex_locks;		  # number of locks in progress
+global mutex_stack;		  # flag if we already printed a stack
+
+probe process("/home/fth/Documents/tp_2020/exercice-1/mySoftwareTestAndSet").function("getProducerCount") {
+    process_names[pid()] = execname();
+    thread_blocktime[tid()] = gettimeofday_us();
+	printf("%s[%d] getProducerCount call detected\n", process_names[pid()], pid())
+}
+
+probe process("/home/fth/Documents/tp_2020/exercice-1/mySoftwareTestAndSet").function("getProducerCount").return {
+  t = tid();
+  ts = thread_blocktime[t];
+  if (ts) {
+    elapsed = gettimeofday_us() - ts;
+    lock_waits[pid()] <<< elapsed;
+    delete thread_blocktime[tid()]
+  }
+}
+
+probe end {
+  // TODO: sort output by sum of wait times, rather than count.
+  foreach ([pid] in lock_waits-) {
+    printf ("%s[%d]  %d times, %dus total, %dus avg\n",
+            process_names[pid], pid, 
+	    @count(lock_waits[pid]),
+	    @sum(lock_waits[pid]),
+	    @avg(lock_waits[pid]));
+  }
+}

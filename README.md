@@ -1,9 +1,4 @@
 # Practical Work
-This is the Multitasking Training Pratical work materials.
+This is the Multitasking Training Pratical work materials for the [SETI MASTER](https://www.universite-paris-saclay.fr/en/formation/master/electrical-engineering/m2-systemes-embarques-et-traitement-de-linformation).
 
-# Unix Practical Work
-
-## Compilation instruction
-```
-gcc -o mySoftware msg.c -lpthread
-```
+All instructions are in the pdf files of the subsequent folders.
