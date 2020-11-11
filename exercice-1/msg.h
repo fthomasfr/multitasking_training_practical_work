@@ -2,7 +2,7 @@
 #define MSG_H
 
 //Message data size
-#define DATA_SIZE 2
+#define DATA_SIZE 256
 
 //message type definition
 typedef struct MSG_BLOCK_TAG
