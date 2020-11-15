@@ -7,7 +7,7 @@
 #define ERROR_INIT 			0
 #define ERROR_SUCCESS		1
 //The number of producers
-#define PRODUCER_COUNT      5
+#define PRODUCER_COUNT      4
 //The number of second the producer shall sleep
 #define PRODUCER_SLEEP_TIME 1
 //The number producer iterations

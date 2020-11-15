@@ -16,7 +16,7 @@
 //producer count storage
 volatile unsigned int produceCount = 0;
 
-pthread_t producers[5];
+pthread_t producers[4];
 
 static void *produce(void *params);
 
