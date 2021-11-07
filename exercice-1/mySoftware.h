@@ -4,8 +4,8 @@
 #include "msg.h"
 
 //The application return code
-#define ERROR_INIT 			0
-#define ERROR_SUCCESS		1
+#define ERROR_INIT 			1
+#define ERROR_SUCCESS		0
 //The number of producers
 #define PRODUCER_COUNT      4
 //The number of second the producer shall sleep

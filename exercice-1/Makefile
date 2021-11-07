@@ -6,13 +6,18 @@ LDFLAGS = -pthread
 
 C= $(wildcard *.c)
 H= $(wildcard *.h)
-POSIX_SRCS := $(filter-out %Atomic.c %TestAndSet.c, $(C))
-ATOMIC_SRCS := $(filter-out %POSIX.c %TestAndSet.c, $(C))
-TESTANDSET_SRCS := $(filter-out %POSIX.c %Atomic.c, $(C))
+PREAMBULE_SRCS := preambule.c
+POSIX_SRCS := $(filter-out %preambule.c %Atomic.c %TestAndSet.c, $(C))
+ATOMIC_SRCS := $(filter-out %preambule.c %POSIX.c %TestAndSet.c, $(C))
+TESTANDSET_SRCS := $(filter-out %preambule.c %POSIX.c %Atomic.c, $(C))
 DEPS= $(H:.h)
+PREAMBULE_OBJS= $(PREAMBULE_SRCS:.c=.o)
 POSIX_OBJS= $(POSIX_SRCS:.c=.o)
 ATOMIC_OBJS= $(ATOMIC_SRCS:.c=.o)
 TESTANDSET_OBJS= $(TESTANDSET_SRCS:.c=.o)
+
+preambule: $(PREAMBULE_OBJS) $(DEPS)
+	$(CC) $(LDFLAGS) -o preambule $(PREAMBULE_OBJS) $(LDLIBS)
 
 posix: $(POSIX_OBJS) $(DEPS)
 	$(CC) $(LDFLAGS) -o mySoftwarePosix $(POSIX_OBJS) $(LDLIBS)
@@ -24,7 +29,10 @@ testandset: $(TESTANDSET_OBJS) $(DEPS)
 	$(CC) $(LDFLAGS) -o mySoftwareTestAndSet $(TESTANDSET_OBJS) $(LDLIBS)
 
 clean:
-	rm -f mySoftwarePosix mySoftwareAtomic mySoftwareTestAndSet $(POSIX_OBJS) $(ATOMIC_OBJS) $(TESTANDSET_OBJS)
+	rm -f preambule mySoftwarePosix mySoftwareAtomic mySoftwareTestAndSet $(PREAMBULE_OBJS) $(POSIX_OBJS) $(ATOMIC_OBJS) $(TESTANDSET_OBJS)
+
+runpreambule: clean preambule
+	./preambule
 
 runposix: clean posix
 	./mySoftwarePosix
