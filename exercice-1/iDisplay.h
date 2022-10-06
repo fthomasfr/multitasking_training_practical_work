@@ -9,4 +9,11 @@
 */
 void messageDisplay(volatile MSG_BLOCK* mBlock);
 
+/**
+* Prints the number of produced and consumed messages. It prints also the difference.
+* @param producedCount the number of produced messages
+* @param consumedCount the number of consumed messages
+*/
+void print(unsigned int producedCount, unsigned int consumedCount);
+
 #endif

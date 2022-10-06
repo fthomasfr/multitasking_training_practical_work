@@ -6,7 +6,7 @@
 #include "messageAdder.h"
 #include "msg.h"
 #include "iMessageAdder.h"
-#include "mySoftware.h"
+#include "multitaskingAccumulator.h"
 #include "iAcquisitionManager.h"
 #include "debug.h"
 
@@ -27,7 +27,15 @@ static void incrementConsumeCount(void);
  */
 static void *sum( void *parameters );
 
-//TODO create accessors to limit semaphore and mutex usage outside of this C module.
+
+MSG_BLOCK getCurrentSum(){
+	//TODO
+}
+
+unsigned int getConsumedCount(){
+	//TODO
+}
+
 
 void messageAdderInit(void){
 	out.checksum = 0;
@@ -35,6 +43,7 @@ void messageAdderInit(void){
 	{
 		out.mData[i] = 0;
 	}
+	//TODO
 }
 
 void messageAdderJoin(void){

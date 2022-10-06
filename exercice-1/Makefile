@@ -20,25 +20,25 @@ preambule: $(PREAMBULE_OBJS) $(DEPS)
 	$(CC) $(LDFLAGS) -o preambule $(PREAMBULE_OBJS) $(LDLIBS)
 
 posix: $(POSIX_OBJS) $(DEPS)
-	$(CC) $(LDFLAGS) -o mySoftwarePosix $(POSIX_OBJS) $(LDLIBS)
+	$(CC) $(LDFLAGS) -o multitaskingAccumulatorPosix $(POSIX_OBJS) $(LDLIBS)
 
 atomic: $(ATOMIC_OBJS) $(DEPS)
-	$(CC) $(LDFLAGS) -o mySoftwareAtomic $(ATOMIC_OBJS) $(LDLIBS)
+	$(CC) $(LDFLAGS) -o multitaskingAccumulatorAtomic $(ATOMIC_OBJS) $(LDLIBS)
 
 testandset: $(TESTANDSET_OBJS) $(DEPS)
-	$(CC) $(LDFLAGS) -o mySoftwareTestAndSet $(TESTANDSET_OBJS) $(LDLIBS)
+	$(CC) $(LDFLAGS) -o multitaskingAccumulatorTestAndSet $(TESTANDSET_OBJS) $(LDLIBS)
 
 clean:
-	rm -f preambule mySoftwarePosix mySoftwareAtomic mySoftwareTestAndSet $(PREAMBULE_OBJS) $(POSIX_OBJS) $(ATOMIC_OBJS) $(TESTANDSET_OBJS)
+	rm -f preambule multitaskingAccumulatorPosix multitaskingAccumulatorAtomic multitaskingAccumulatorTestAndSet $(PREAMBULE_OBJS) $(POSIX_OBJS) $(ATOMIC_OBJS) $(TESTANDSET_OBJS)
 
 runpreambule: clean preambule
 	./preambule
 
 runposix: clean posix
-	./mySoftwarePosix
+	./multitaskingAccumulatorPosix
 
 runatomic: clean atomic
-	./mySoftwareAtomic
+	./multitaskingAccumulatorAtomic
 
 runtestandset: clean testandset
-	./mySoftwareTestAndSet
+	./multitaskingAccumulatorTestAndSet

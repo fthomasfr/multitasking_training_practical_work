@@ -12,3 +12,7 @@ void messageDisplay(volatile MSG_BLOCK* mBlock){
 		D(printf("%u ",mBlock->mData[i]));
 	D(printf("]\n"));
 }
+
+void print(unsigned int producedCount, unsigned int consumedCount){
+	printf("[displayManager]Produced messages: %d, Consumed messages: %d, Messages left: %d\n", producedCount, consumedCount, producedCount - consumedCount);
+}

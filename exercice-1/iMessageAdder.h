@@ -3,7 +3,14 @@
 
 #include "msg.h"
 
+/**
+* Gets a message that represents the current value of the sum.
+*/
+MSG_BLOCK getCurrentSum();
 
-//TODO create accessors prototype here.
+/**
+* Get the number of consumed messages.
+*/
+unsigned int getConsumedCount();
 
 #endif

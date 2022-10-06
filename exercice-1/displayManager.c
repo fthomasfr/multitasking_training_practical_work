@@ -6,7 +6,7 @@
 #include "iAcquisitionManager.h"
 #include "iMessageAdder.h"
 #include "msg.h"
-#include "mySoftware.h"
+#include "multitaskingAccumulator.h"
 #include "debug.h"
 
 // DisplayManager thread.

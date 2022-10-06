@@ -7,7 +7,7 @@
 #include "acquisitionManager.h"
 #include "msg.h"
 #include "iSensor.h"
-#include "mySoftware.h"
+#include "multitaskingAccumulator.h"
 #include "iAcquisitionManager.h"
 #include "debug.h"
 
@@ -33,7 +33,7 @@ static unsigned int createSynchronizationObjects(void);
 /*
 * Increments the produce count.
 */
-static void incrementProducerCount(void);
+static void incrementProducedCount(void);
 
 static unsigned int createSynchronizationObjects(void)
 {
@@ -43,16 +43,20 @@ static unsigned int createSynchronizationObjects(void)
 	return ERROR_SUCCESS;
 }
 
-static void incrementProducerCount(void)
+static void incrementProducedCount(void)
 {
 	//TODO
 }
 
-unsigned int getProducerCount(void)
+unsigned int getProducedCount(void)
 {
 	unsigned int p = 0;
 	//TODO
 	return p;
+}
+
+MSG_BLOCK getMessage(void){
+	//TODO
 }
 
 //TODO create accessors to limit semaphore and mutex usage outside of this C module.

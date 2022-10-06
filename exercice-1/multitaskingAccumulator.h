@@ -1,5 +1,5 @@
-#ifndef MY_SOFTWARE_H
-#define MY_SOFTWARE_H
+#ifndef MULTITASKING_ACCUMULATOR_H
+#define MULTITASKING_ACCUMULATOR_H
 
 #include "msg.h"
 
