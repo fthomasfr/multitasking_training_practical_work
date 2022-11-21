@@ -11,9 +11,11 @@
 #include "iAcquisitionManager.h"
 #include "debug.h"
 
+#include <stdatomic.h> // for atomic variable 
+
 
 //producer count storage
-volatile unsigned int produceCount = 0;
+_Atomic int produceCount = 0; // replace volatile with atomic for more thread safe operation
 
 pthread_t producers[4];
 
@@ -46,12 +48,14 @@ static unsigned int createSynchronizationObjects(void)
 static void incrementProducedCount(void)
 {
 	//TODO
+	produceCount++; // incrementation 
 }
 
 unsigned int getProducedCount(void)
 {
 	unsigned int p = 0;
 	//TODO
+	p = produceCount;
 	return p;
 }
 
