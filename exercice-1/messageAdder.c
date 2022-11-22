@@ -9,14 +9,13 @@
 #include "multitaskingAccumulator.h"
 #include "iAcquisitionManager.h"
 #include "debug.h"
-#include <stdatomic.h>
 
 //consumer thread
 pthread_t consumer;
 //Message computed
 volatile MSG_BLOCK out;
 //Consumer count storage
-_Atomic int consumeCount = 0;
+volatile int consumeCount = 0;
 
 /**
  * Increments the consume count.
