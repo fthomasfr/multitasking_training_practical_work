@@ -123,11 +123,11 @@ void *produce(void* params)
 		printf("Trying to own the mutex\n");
     	pthread_mutex_lock(&mutex);
     	printf("Owns the mutex\n");
-		getInput(gettid(), &msg_bloc);
+		getInput(gettid(), &msg_bloc); // get input message
+		incrementProducedCount(); //incremente le nombre d'entree produit 
 		break; // exit the loop when we get the message
 	}
 	printf("[acquisitionManager] %d termination\n", gettid());
 	//TODO
-	incrementProducedCount(); //incremente le nombre d'entree produit 
 	pthread_mutex_unlock(&mutex);
 }

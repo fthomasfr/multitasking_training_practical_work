@@ -30,10 +30,16 @@ static void *sum( void *parameters );
 
 MSG_BLOCK getCurrentSum(){
 	//TODO
+	return out;
 }
-
+// increment consume count
+static void incrementConsumeCount(void){
+	consumeCount++;
+}
 unsigned int getConsumedCount(){
 	//TODO
+	consumeCount = getProducedCount() - consumeCount;
+	return consumeCount;
 }
 
 
@@ -44,10 +50,18 @@ void messageAdderInit(void){
 		out.mData[i] = 0;
 	}
 	//TODO
+	printf("Creating the consumer thread\n");
+    pthread_create(&consumer, NULL, sum, NULL);
+
+	return; 
 }
 
 void messageAdderJoin(void){
 	//TODO
+	printf("Waiting the thread end\n");
+	pthread_join(consumer, NULL);
+
+	return;
 }
 
 static void *sum( void *parameters )
@@ -58,9 +72,15 @@ static void *sum( void *parameters )
 		i++;
 		sleep(ADDER_SLEEP_TIME);
 		//TODO
+		MSG_BLOCK msg = getMessage();
+		if(messageCheck(&msg) && messageCheck(&out)){
+			messageAdd(&out, &msg);
+			incrementConsumeCount();
+		}
 	}
 	printf("[messageAdder] %d termination\n", gettid());
 	//TODO
+
 }
 
 
