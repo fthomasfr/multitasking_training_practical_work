@@ -20,10 +20,14 @@ static void *display( void *parameters );
 
 void displayManagerInit(void){
 	//TODO
+	printf("Creating the dispaly thread\n");
+    pthread_create(&displayThread, NULL, display, NULL);
 }
 
 void displayManagerJoin(void){
-	//TODO	
+	//TODO
+	printf("Waiting the display thread end\n");
+	pthread_join(displayThread, NULL);	
 } 
 
 static void *display( void *parameters )
@@ -33,7 +37,11 @@ static void *display( void *parameters )
 	while(diffCount < DISPLAY_LOOP_LIMIT){
 		sleep(DISPLAY_SLEEP_TIME);
 		//TODO
+		MSG_BLOCK msg = getCurrentSum();
+		print(getProducedCount(), getConsumedCount());
+		messageDisplay(&msg);
 	}
 	printf("[displayManager] %d termination\n", gettid());
    //TODO
+   pthread_exit(NULL);
 }

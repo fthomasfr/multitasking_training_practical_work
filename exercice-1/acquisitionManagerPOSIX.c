@@ -95,7 +95,7 @@ unsigned int acquisitionManagerInit(void)
 	for (i = 0; i < PRODUCER_COUNT; i++)
 	{
 		//TODO
-		printf("Creating the thread\n");
+		printf("Creating the producers thread\n");
     	pthread_create(&producers[i], NULL, produce, NULL);
 
 	}
@@ -109,7 +109,7 @@ void acquisitionManagerJoin(void)
 	for (i = 0; i < PRODUCER_COUNT; i++)
 	{
 		//TODO
-		printf("Waiting the thread end\n");
+		printf("Waiting for all the producer thread end\n");
 		pthread_join(producers[i], NULL);
 	}
 
@@ -155,5 +155,5 @@ void *produce(void* params)
 	}
 	printf("[acquisitionManager] %d termination\n", gettid());
 	//TODO
-	sem_post(SL);
+	pthread_exit(NULL);
 }
