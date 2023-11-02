@@ -1,0 +1,57 @@
+@startuml
+!pragma teoz true
+box "[TODO] process"
+participant bash
+
+box "[TODO] process (child process)" #lightblue
+participant "[TODO]" as main
+participant "[TODO]:pthread_t" as thread1
+participant "[TODO]:pthread_mutex_t" as mutex
+participant "[TODO]:sem_t" as semaphore
+end box
+end box
+
+activate bash
+bash -> main --++ : "[TODO]"
+
+main -> semaphore:"[TODO]"
+activate semaphore #gold
+return
+main -> semaphore:"[TODO]"
+activate semaphore #gold
+return
+
+main -> thread1:"[TODO]"
+activate thread1 #FFBBBB
+thread1 --> main
+note over thread1 : produce
+
+main -> thread1 :"[TODO]"
+deactivate main
+
+thread1 -> mutex: "[TODO]"
+activate mutex #plum
+return
+
+thread1 -> mutex: "[TODO]"
+activate mutex #plum
+return
+
+thread1 -> semaphore: "[TODO]"
+activate semaphore #gold
+return
+
+thread1 -> semaphore: "[TODO]"
+activate semaphore #gold
+return 
+
+thread1 -> thread1 : "[TODO]"
+thread1 --> main --++
+
+main -> semaphore : "[TODO]"
+activate semaphore #gold
+return
+
+main -> bash --++: "[TODO]"
+
+@enduml
