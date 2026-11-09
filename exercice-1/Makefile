@@ -15,6 +15,8 @@ PREAMBULE_OBJS= $(PREAMBULE_SRCS:.c=.o)
 POSIX_OBJS= $(POSIX_SRCS:.c=.o)
 ATOMIC_OBJS= $(ATOMIC_SRCS:.c=.o)
 TESTANDSET_OBJS= $(TESTANDSET_SRCS:.c=.o)
+PUMLS := $(wildcard diagrams/*.puml)
+PNGS := $(PUMLS:.puml=.png)
 
 preambule: $(PREAMBULE_OBJS) $(DEPS)
 	$(CC) $(LDFLAGS) -o preambule $(PREAMBULE_OBJS) $(LDLIBS)
@@ -30,6 +32,7 @@ testandset: $(TESTANDSET_OBJS) $(DEPS)
 
 clean:
 	rm -f preambule multitaskingAccumulatorPosix multitaskingAccumulatorAtomic multitaskingAccumulatorTestAndSet $(PREAMBULE_OBJS) $(POSIX_OBJS) $(ATOMIC_OBJS) $(TESTANDSET_OBJS)
+	rm -f diagrams/*.png
 
 runpreambule: clean preambule
 	./preambule
@@ -42,3 +45,8 @@ runatomic: clean atomic
 
 runtestandset: clean testandset
 	./multitaskingAccumulatorTestAndSet
+
+pumls: $(PNGS)
+
+diagrams/%.png: diagrams/%.puml
+	docker run --rm -i ghcr.io/plantuml/plantuml -pipe < $< > $@
